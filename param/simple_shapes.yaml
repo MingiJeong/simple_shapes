@@ -1,5 +1,4 @@
-FREQUENCY: 10 #Hz.
-LINEAR_VELOCITY: 0.2 # m/s
-ANGULAR_VELOCITY: math.pi/4 # rad/s
-DEFAULT_CMD_VEL_TOPIC: 'cmd_vel'
-DEFAULT_ERROR_TOPIC: 'error'
+FREQUENCY: 20 #Hz.
+ERROR_FREQUENCY: 1 #Hz
+LINEAR_VELOCITY: 0.1 # m/s
+ANGULAR_VELOCITY: 0.1 # rad/s (to be mapped with multiplication of pi in script)

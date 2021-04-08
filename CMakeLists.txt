@@ -58,7 +58,7 @@ include
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
 catkin_install_python(PROGRAMS
-  nodes/simple_shapes
+  nodes/simple_shapes_drawer
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
