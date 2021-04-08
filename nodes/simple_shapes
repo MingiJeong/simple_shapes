@@ -1,0 +1,70 @@
+#!/usr/bin/env python
+
+# import of python modules
+import math
+import numpy as np
+import sys
+
+# import of relevant libraries
+import rospy # module for ROS APIs
+from geometry_msgs.msg import Twist
+from std_msgs.msg import Float32
+
+# import custom modules
+from simple_shapes.aux_function import *
+
+# get params from .yaml file via param server
+FREQUENCY = rospy.get_param('~FREQUENCY', 10) #Hz.
+LINEAR_VELOCITY = rospy.get_param('~LINEAR_VELOCITY', 0.2) # m/s
+ANGULAR_VELOCITY = rospy.get_param('~ANGULAR_VELOCITY', math.pi/4) # m/s # rad/s
+DEFAULT_CMD_VEL_TOPIC = rospy.get_param('~DEFAULT_CMD_VEL_TOPIC', 'cmd_vel')
+DEFAULT_ERROR_TOPIC = rospy.get_param('~DEFAULT_ERROR_TOPIC', 'error')
+
+
+class SimpleShapes():
+    def __init__(self, linear_velocity=LINEAR_VELOCITY, angular_velocity=ANGULAR_VELOCITY):
+        self._cmd_pub = rospy.Publisher(DEFAULT_CMD_VEL_TOPIC, Twist, queue_size=1)
+
+        self.rate = rospy.Rate(FREQUENCY)
+
+    def move_forward(self):
+        """ Function to move forward for a given distance """
+        # next_wp
+        vel_msg = Twist()
+        vel_msg.linear.x = 0.5
+        # TODO: while sentence by distance
+
+        print("dist", distance_calculator(1,1,3,3))
+        while not rospy.is_shutdown():
+            self._cmd_pub.publish(vel_msg)
+            self.rate.sleep()
+
+        # stop 
+
+    def stop(self):
+        vel_msg = Twist()
+        self._cmd_pub.publish(vel_msg)
+
+
+def main():
+    """ Main function """
+
+    # initialization of node
+    rospy.init_node("simple_shapes")
+
+    # Sleep for a few seconds to wait for the registration.
+    rospy.sleep(2)
+    
+    # Initialization of the class for the simple motion.
+    simple_shapes = SimpleShapes()
+
+    # If interrupted, send a stop command.
+    rospy.on_shutdown(simple_shapes.stop)
+
+    while not rospy.is_shutdown():
+        simple_shapes.move_forward()
+
+
+if __name__ == "__main__":
+    """Run the main function."""
+    main()

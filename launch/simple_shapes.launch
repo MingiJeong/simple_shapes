@@ -1,0 +1,15 @@
+<launch>
+  <arg name="side_number" default="3"/>
+  <arg name="side_length" default="5"/>
+  <arg name="dir_counter_clock" default="true"/>
+
+
+  <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_empty_world.launch"/>
+
+  <node pkg="simple_shapes" type="simple_shapes" name="simple_shapes" output="screen">
+    <param name="side_number" value="$(arg side_number)"/>
+    <param name="side_length" value="$(arg side_length)"/>
+    <param name="dir_counter_clock" value="$(arg dir_counter_clock)"/>
+    <rosparam file="$(find simple_shapes)/param/simple_shapes.yaml" command="load"/>
+  </node>
+</launch>
