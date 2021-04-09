@@ -20,7 +20,7 @@ DEFAULT_ERROR_TOPIC = 'error'
 DEFAULT_ODOM_TOPIC = 'odom'
 
 """
-SimpleShapes class to achieve a task
+SimpleShapes class definition to achieve a task
 """
 class SimpleShapes():
     def __init__(self, dir_counter_clock):
@@ -177,11 +177,11 @@ class SimpleShapes():
             pass
 
     def shape_drawer(self, side_number, side_length, dir_counter_clock):
+        """
+        shape drawing task function as per the user inputs
+        """
         # figure out the regular polygon needed to be drawn
         self.coordinate_list = regular_polygon(side_number, side_length, dir_counter_clock)
-
-        # TODO 
-        # print out the shape
 
         # starting to follow the polygon
         while self.iter < len(self.coordinate_list):

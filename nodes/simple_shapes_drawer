@@ -4,7 +4,6 @@
 import rospy # module for ROS APIs
 
 # import custom modules
-from simple_shapes.aux_function import *
 from simple_shapes.simple_shapes import SimpleShapes
 
 
